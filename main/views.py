@@ -28,7 +28,7 @@ def home(request):
             'email': email,
             'surname': surname,
         }
-        email_text = f'Ближайшие дни мы вам звоним {surname}'
+        email_text = f'Ближайшие дни мы вам звоним {name}'
         print(data)
         send_mail(data['name'] + ", спасибо за подписку!", email_text, '', [data['email']])
         return redirect('/')
