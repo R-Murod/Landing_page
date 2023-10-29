@@ -9,7 +9,7 @@
     <meta name="author" content="Template Mo">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
-    <title>Art Factory HTML CSS Template</title>
+    <title>Art Factory</title>
     <!--
 
     ART FACTORY
@@ -24,35 +24,58 @@
     <link rel="stylesheet" type="text/css" href="static/css/owl-carousel.css">
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
 
+<!-- Google tag (gtag.js) -->
 </head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RKZLL5GXNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-RKZLL5GXNM');
+</script>
 <body>
+
 <style>
+/* Style for the chatbot icon */
+.open-chatbot-icon {
+    position: fixed;
+    bottom: 20px; /* Adjust the position as needed */
+    right: 20px; /* Adjust the position as needed */
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.open-chatbot-icon i {
+    font-size: 24px;
+}
+
 /* Style for the chatbot modal */
 .modal {
     display: none;
     position: fixed;
     z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    overflow: auto;
-}
-
-.modal-content {
+    right: 60px; /* Adjust the position as needed */
+    bottom: 60px; /* Adjust the position as needed */
     background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 400px;
+    max-width: 300px; /* Adjust the width as needed */
+}
+
+.modal-content {
+    padding: 20px;
 }
 
 .close-modal {
-    float: right;
+    position: absolute;
+    top: 5px;
+    right: 5px;
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
@@ -63,7 +86,7 @@
 }
 
 .chatbot-chat {
-    height: 200px;
+    max-height: 200px; /* Adjust the height as needed */
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
@@ -90,8 +113,45 @@
 #send-message:hover {
     background-color: #0056b3;
 }
-</style>
+/* Container styling */
+/* Container styling */
+.hidden-content-container {
+    float: right; /* Float the container to the right */
+    width: 50%; /* Set the width of the container (adjust as needed) */
+    padding: 10px;
+    background-color: #f0f0f0; /* Background color */
+    border: 1px solid #ddd; /* Border */
+    margin: 10px;
+}
 
+/* Style the text inside the container */
+.hidden-content-container p {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Initially hide the container */
+.hidden-content {
+    display: none;
+}
+/* Style for "More2" content */
+#more2.hidden-content-container {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    margin: 10px;
+}
+
+/* Style the text inside the "More2" container */
+#more2.hidden-content-container p {
+    font-size: 14px;
+    color: #333;
+}
+
+
+</style>
 
 <!-- ***** Preloader Start ***** -->
 <div id="preloader">
@@ -140,6 +200,23 @@
 
 </header>
 <!-- ***** Header Area End ***** -->
+<!-- Icon for opening the chatbot modal -->
+<div id="open-chatbot-icon" class="open-chatbot-icon">
+  <i class="fa fa-comments"></i>
+</div>
+<div id="chatbot-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="close-chatbot">&times;</span>
+        <div class="chatbot-container">
+            <!-- Chatbot content goes here -->
+            <div class="chatbot-chat">
+                <div class="chatbot-message">How can I help you?</div>
+            </div>
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+</div>
 
 
 <!-- ***** Welcome Area Start ***** -->
@@ -245,28 +322,6 @@
 <!-- ***** Features Big Item End ***** -->
 
 
-<!-- ***** Features Small Start ***** -->
-<section class="section" id="services">
-    <div class="container">
-        <div class="row">
-            <div class="owl-carousel owl-theme">
-                {% for user in users %}
-                    <div class="item service-item">
-                    <div class="service-title">
-                        <h6>{{ user.email }}</h6>
-                    </div>
-                    <h5 class="service-title">{{ user.name }}</h5>
-                    <p>{{ user.surname }}</p>
-                    <p>{{ user.sent_at }}</p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ***** Features Small End ***** -->
-
-
 <!-- ***** Frequently Question Start ***** -->
 <section class="section" id="frequently-question">
     <div class="container">
@@ -338,7 +393,27 @@
                                     <br><br>
                                     Pellentesque maximus lorem sed elit imperdiet mattis. Duis posuere mauris ut eros
                                     rutrum sodales. Aliquam erat volutpat.</p>
+                                <p><a href="#more1">More</a></p>
                             </div>
+                        </div>
+                        <div id="more1" class="hidden-content hidden-content-container">
+                            <p>This is the additional information you want to show when "More" is clicked.
+                                Duis vulputate porttitor urna sit amet pretium. Phasellus sed pulvinar eros,
+                                condimentum consequat ex. Suspendisse potenti.
+                                <br><br>
+                                Pellentesque maximus lorem sed elit imperdiet mattis. Duis posuere mauris ut eros
+                                rutrum sodales. Aliquam erat volutpat
+                            </p>
+                            <p><a href="#more2">More2</a></p>
+                        </div>
+                        <div id="more2" class="hidden-content-container">
+                            <p>This is additional information shown when "More2" is clicked.
+                                Duis vulputate porttitor urna sit amet pretium. Phasellus sed pulvinar eros,
+                                condimentum consequat ex. Suspendisse potenti.
+                                <br><br>
+                                Pellentesque maximus lorem sed elit imperdiet mattis. Duis posuere mauris ut eros
+                                rutrum sodales. Aliquam erat volutpat
+                            </p>
                         </div>
                     </article>
                     <article class="accordion">
@@ -435,6 +510,29 @@
 <!-- ***** Frequently Question End ***** -->
 
 
+<!-- ***** Features Small Start ***** -->
+<section class="section" id="services">
+        <div class="container">
+            <div class="row">
+                <div>
+                    <h1 style="text-align:center; margin-left: 120px;">Service</h1><br><br>
+                    <div class="item service-item" style="margin-left: 150px;">
+                        <div class="icon">
+                            <i><img src="assets/images/service-icon-01.png" alt=""></i>
+                        </div>
+                        <h5 class="service-title">First Service</h5>
+                        <p>Aenean vulputate massa sed neque consectetur, ac fringilla quam aliquet. Sed a enim nec eros tempor cursus at id libero.</p>
+                        <a href="#question" class="main-button">Add comment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- ***** Features Small End ***** -->
+
+<br>
+<br>
+<br>
 <!-- ***** Contact Us Start ***** -->
 <section class="section" id="contact-us">
     <div class="container-fluid">
@@ -520,43 +618,113 @@
     </div>
 </footer>
 
+<div id="disqus_thread"></div>
 
-<!-- ***** Chatbot Modal Start ***** -->
-<div id="chatbot-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" id="close-chatbot">&times;</span>
-        <div class="chatbot-container">
-            <!-- Chatbot content goes here -->
-            <div class="chatbot-chat"></div>
-            <input type="text" id="user-input" placeholder="Type your message...">
-            <button id="send-message">Send</button>
-        </div>
-    </div>
-</div>
-<!-- ***** Chatbot Modal End ***** -->
+<!-- ***** Frequently Question Start ***** -->
+<!--<section class="section" id="question" style="margin-bottom: 150px;">-->
+<!--    <div class="container">-->
+
+<!--        <div class="row">-->
+<!--            <div class="left-text col-lg-6 col-md-6 col-sm-12">-->
+<!--                <div class="col-lg-3 col-md-4">-->
+<!--                    <div id="des-details2" class="tab-pane">-->
+<!--                        <div class="ratting-form-wrapper">-->
+<!--                            <h3 style="font-size: 1.5em; color: #333;">Add comment for First Service</h3>-->
+<!--                            <div class="ratting-form">-->
+<!--                                <form action="/" method="post">-->
+<!--                                    {% csrf_token %}-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-md-12">-->
+<!--                                            <div class="rating-form-style mb-20">-->
+<!--                                               <label required>Имя</label>-->
+<!--                                                <input type="text" name="name">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-12">-->
+<!--                                            <div class="rating-form-style mb-20">-->
+<!--                                                <label required>Комментария</label>-->
+<!--                                                <textarea name="text"></textarea>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-12">-->
+<!--                                            <div class="form-submit">-->
+<!--                                                <input type="submit" value="Отправить">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-6 col-md-6 col-sm-12">-->
+<!--                <div class="col-lg-9 col-md-8">-->
+<!--                    <div class="tab-content" id="myaccountContent">-->
+<!--                        &lt;!&ndash; Single Tab Content Start &ndash;&gt;-->
+<!--                        <div class="tab-pane fade show active" id="dashboad" role="tabpanel">-->
+<!--                            {% for t in testimonials %}-->
+<!--                                <div class="myaccount-content">-->
+<!--                                    <h3 style="font-size: 1.5em; color: #333;">{{ t.name }}</h3>-->
+<!--                                    <div class="welcome" style="font-size: 0.9em; color: #777;">-->
+<!--                                        <strong>{{ t.created_at|date:"d/m/Y" }}</strong>-->
+<!--                                    </div>-->
+<!--                                    <p class="mb-0" style="font-size: 1em; color: #555; margin-top: 10px;">-->
+<!--                                        {{ t.text }}-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            {% endfor %}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://localhost-r4fz3gjj9f.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<!-- ***** Frequently Question End ***** -->
 <script>
 // Get references to the modal and close button
 var chatbotModal = document.getElementById("chatbot-modal");
 var closeChatbot = document.getElementById("close-chatbot");
+var openChatbotIcon = document.querySelector(".open-chatbot-icon");
 
-// Function to open the chatbot modal
-function openChatbotModal() {
-    chatbotModal.style.display = "block";
+// Function to toggle the chatbot modal (open/close)
+function toggleChatbotModal() {
+    if (chatbotModal.style.display === "block") {
+        // If the modal is open, close it
+        chatbotModal.style.display = "none";
+    } else {
+        // If the modal is closed, open it
+        chatbotModal.style.display = "block";
+    }
 }
 
-// Function to close the chatbot modal
-function closeChatbotModal() {
-    chatbotModal.style.display = "none";
-}
-
-// Attach click event handlers to the "Contact Us" link and close button
-document.querySelector("a[href='#contact-us']").addEventListener("click", openChatbotModal);
-closeChatbot.addEventListener("click", closeChatbotModal);
+// Attach click event handler to open/close the modal
+openChatbotIcon.addEventListener("click", toggleChatbotModal);
+closeChatbot.addEventListener("click", toggleChatbotModal);
 
 // Close the modal when clicking anywhere outside of it
 window.addEventListener("click", function(event) {
     if (event.target == chatbotModal) {
-        closeChatbotModal();
+        chatbotModal.style.display = "none";
     }
 });
 
@@ -568,6 +736,24 @@ document.getElementById("send-message").addEventListener("click", function() {
     // You can update the chatbot chat container with the conversation
     // and handle user interactions here.
 });
+</script>
+<script>
+    // Get all "More" links by their class
+    const moreLinks = document.querySelectorAll('a[href^="#more"]');
+
+    // Add click event listeners to each "More" link
+    moreLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').slice(1); // Remove the "#" from the href
+            const targetContent = document.getElementById(targetId);
+
+            if (targetContent) {
+                // Toggle the visibility of the target content
+                targetContent.classList.toggle('hidden-content');
+            }
+        });
+    });
 </script>
 
 <!-- jQuery -->

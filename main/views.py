@@ -8,6 +8,19 @@ from main.models import *
 
 def home(request):
     users = Email.objects.all()
+    user_get = Email.objects.first()
+    testimonials = Testimonials.objects.all()
+
+    if request.POST:
+        name = request.POST.get('name', '')
+        text = request.POST.get('text', '')
+        if name and text:
+            comment = Testimonials()
+            comment.name = name
+            comment.text = text
+            comment.save()
+            return redirect('/')
+
     if request.method == 'POST':
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
@@ -32,4 +45,4 @@ def home(request):
         print(data)
         send_mail(data['name'] + ", спасибо за подписку!", email_text, '', [data['email']])
         return redirect('/')
-    return render(request, "index.html", {'users': users})
+    return render(request, "index.html", {'users': users, 'testimonials': testimonials, 'user_get':user_get,})

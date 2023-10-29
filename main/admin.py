@@ -3,3 +3,4 @@ from main.models import *
 
 
 admin.site.register(Email)
+admin.site.register(Testimonials)
