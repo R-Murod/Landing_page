@@ -20,3 +20,15 @@ class Testimonials(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Artist(models.Model):
+    name = models.CharField(max_length=100)
+    bio = models.TextField()
+
+
+class Artwork(models.Model):
+    title = models.CharField(max_length=100)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    description = models.TextField()
+    image = models.ImageField(upload_to='artworks/')
